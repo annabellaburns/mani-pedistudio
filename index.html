@@ -1,118 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include meta tag for character set directly in head -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Mani-Pedi Studio</title>
     <style>
-      body {
-        background-color: white;
-        color: black;
-        font-family: Verdana;
-        margin: 0;
-        padding: 0;
-      }
+        #image-track {
+           display: flex;
+           gap: 4vmin;
+           position: absolute;
+           left: 50%;
+           top: 70%;
+           transform: translate(-50%, -50%);
+           user-select: none;
+        }
 
-      header {
-        background-color: black;
-        color: rgb(225, 0, 0);
-        text-align: center;
-        padding: 1em;
-      }
+        #image-track>.image {
+            width: 40vmin;
+            height: 56vmin;
+            object-fit: cover;
+            object-position: 100% center;
+        }
 
-      section {
-        padding: 2em;
-        text-align: center;
-      }
+        body.menu-toggled>.meta-link>span {
+            color: rgb(30, 30, 30);
+        }
 
-      .button-container {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-      }
+        #source-link {
+            bottom: 60px;
+        }
 
-      .button {
-        background-color: rgb(223, 0, 0);
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-        width: 120px;
-      }
+        #source-link>i {
+            color: rgb(94, 106, 210);
+        }
 
-      .button:hover {
-        background-color: black;
-      }
+        #yt-link>i {
+            color: rgb(239, 83, 80);
+        }
 
-      footer {
-        background-color: black;
-        color: red;
-        text-align: center;
-        padding: 1em 0;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-      }
+        .meta-link {
+            align-items: center;
+            backdrop-filter: blur(3px);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            bottom: 10px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: inline-flex;
+            gap: 5px;
+            left: 10px;
+            padding: 10px 20px;
+            position: fixed;
+            text-decoration: none;
+            transition: background-color 400ms, border-color 400ms;
+            z-index: 10000;
+        }
 
-      #p1 {
-        text-align: center;
-      }
+        .meta-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-      @media screen and (max-width: 600px) {
+        .meta-link>i,
+        .meta-link>span {
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .meta-link>span {
+            color: white;
+            font-family: "Rubik", sans-serif;
+            font-weight: 500;
+        }
+
+        body {
+            background-color: white;
+            color: black;
+            font-family: Verdana;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: auto;
+        }
+
+        header {
+            background-color: black;
+            color: rgb(225, 0, 0);
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            padding: 2em;
+            text-align: center;
+        }
+
         .button-container {
-          flex-direction: column;
-          align-items: center;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
         }
 
         .button {
-          margin-top: 10px;
+            background-color: rgb(223, 0, 0);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 120px;
         }
-      }
+
+        .button:hover {
+            background-color: black;
+        }
+
+        footer {
+            background-color: black;
+            color: red;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #p1 {
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button {
+                margin-top: 10px;
+            }
+        }
     </style>
+</head>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var phoneNumberButton = document.getElementById("phoneButton");
-
-        if (isMobileDevice()) {
-          phoneNumberButton.href = "tel:+359878335775";
-        } else {
-          phoneNumberButton.removeAttribute("href");
-          phoneNumberButton.style.cursor = "not-allowed";
-        }
-      });
-
-      function isMobileDevice() {
-        return (
-          typeof window.orientation !== "undefined" ||
-          navigator.userAgent.indexOf("IEMobile") !== -1
-        );
-      }
-    </script>
-  </head>
-
-  <body>
+<body>
     <header>
-      <h1>Mani-Pedi Studio</h1>
+        <h1>Mani-Pedi Studio</h1>
     </header>
 
     <section>
-      <h2>Добре дошли в студио Мани-Педи!</h2>
-      <p id="p1">Отдайте се на най-доброто изживяване тук.</p>
+        <h2>Добре дошли в студио Мани-Педи!</h2>
+        <p id="p1">Отдайте се на най-доброто изживяване тук.</p>
 
-      <div class="button-container">
-        <a href="services.html" target="_blank" class="button">Услуги</a>
-        <a
-          href="https://www.google.com/maps/dir/43.2222039,27.9223871/mani+pedi+studio/@43.2133227,27.8929852,14z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x40a453f36f756b4b:0x56254d8da22acfb4!2m2!1d27.9096394!2d43.2021823?entry=ttu"
-          target="_blank"
-          class="button"
-          >Адрес</a
-        >
-        <a href="tel:+359878335775" class="button">Звънни сега</a>
-      </div>
+        <div class="button-container">
+            <a href="services.html" target="_blank" class="button">Услуги</a>
+            <a href="https://www.google.com/maps/dir/43.2222039,27.9223871/mani+pedi+studio/@43.2133227,27.8929852,14z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x40a453f36f756b4b:0x56254d8da22acfb4!2m2!1d27.9096394!2d43.2021823?entry=ttu"
+                target="_blank" class="button">Адрес</a>
+            <a href="tel:+359878335775" class="button">Звънни сега</a>
+        </div>
     </section>
 
+    <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+        <img class="image"
+            src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            draggable="false" />
+        <img class="image"
+            src="https://images.unsplash.com/photo-1610194352361-4c81a6a8967e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80"
+            draggable="false" />
+        <img class="image"
+            src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            draggable="false" />
+        <img class="image"
+            src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            draggable="false" />
+        <img class="image"
+            src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            draggable="false" />
+        <img class="image"
+            src="https://images.unsplash.com/photo-1496753480864-3e588e0269b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2134&q=80"
+            draggable="false" />
+        <img class="image"
+            src="https://images.unsplash.com/photo-1613346945084-35cccc812dd5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1759&q=80"
+            draggable="false" />
+        <img class="image"
+            src="https://images.unsplash.com/photo-1516681100942-77d8e7f9dd97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            draggable="false" />
+    </div>
+
     <footer>&copy; 2023 Mani-Pedi Studio</footer>
-  </body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var phoneNumberButton = document.getElementById("phoneButton");
+
+            if (isMobileDevice()) {
+                phoneNumberButton.href = "tel:+359878335775";
+            } else {
+                phoneNumberButton.removeAttribute("href");
+                phoneNumberButton.style.cursor = "not-allowed";
+            }
+        });
+
+        function isMobileDevice() {
+            return (
+                typeof window.orientation !== "undefined" ||
+                navigator.userAgent.indexOf("IEMobile") !== -1
+            );
+        }
+
+        const track = document.getElementById("image-track");
+
+        const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
+
+        const handleOnUp = () => {
+            track.dataset.mouseDownAt = "0";
+            track.dataset.prevPercentage = track.dataset.percentage;
+        }
+
+        const handleOnMove = e => {
+            if (track.dataset.mouseDownAt === "0") return;
+
+            const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+                maxDelta = window.innerWidth / 2;
+
+            const percentage = (mouseDelta / maxDelta) * -100,
+                nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+                nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+
+            track.dataset.percentage = nextPercentage;
+
+            track.animate({
+                transform: `translate(${nextPercentage}%, -50%)`
+            }, {
+                duration: 1200,
+                fill: "forwards"
+            });
+
+            for (const image of track.getElementsByClassName("image")) {
+                image.animate({
+                    objectPosition: `${100 + nextPercentage}% center`
+                }, {
+                    duration: 1200,
+                    fill: "forwards"
+                });
+            }
+        }
+
+        window.onmousedown = e => handleOnDown(e);
+
+        window.ontouchstart = e => handleOnDown(e.touches[0]);
+
+        window.onmouseup = e => handleOnUp(e);
+
+        window.ontouchend = e => handleOnUp(e.touches[0]);
+
+        window.onmousemove = e => handleOnMove(e);
+
+        window.ontouchmove = e => handleOnMove(e.touches[0]);
+    </script>
+</body>
+
 </html>
